@@ -1,4 +1,4 @@
-# Assesment Infrastructure as Code Deployment using Terraform
+# Assesment Infrastructure as Code Deployment using Terraform (IAC)
 
 This repository contains Terraform configurations for deploying a multi-tier architecture on AWS. The setup includes VPC, subnets, internet gateway, NAT gateway, security groups, EC2 instances, RDS, S3, CloudFront, and a Network Load Balancer (NLB).
 
