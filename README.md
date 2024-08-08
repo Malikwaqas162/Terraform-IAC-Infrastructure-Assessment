@@ -59,7 +59,7 @@ The architecture includes:
 
 ## Usage
 
-1. Update the `terraform.tfvars` file with your configuration values.
+1. Update the `my_variable.tfvars` file with your configuration values.
 
     ```hcl
     region               = "us-west-2"
@@ -83,7 +83,7 @@ The architecture includes:
 2. Apply the Terraform configurations:
 
     ```bash
-    terraform apply -var-file="terraform.tfvars"
+    terraform apply -var-file="my_variables.tfvars"
     ```
 
     Confirm the apply action with `yes`.
