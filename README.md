@@ -16,6 +16,7 @@ This repository contains Terraform configurations for deploying a multi-tier arc
 ## Architecture
 
 The architecture includes:
+![alt text](image.png)
 
 1. **VPC:** A Virtual Private Cloud with public and private subnets across two availability zones.
 2. **Subnets:** 
