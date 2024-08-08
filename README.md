@@ -131,4 +131,5 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Author by [Muhammad Waqas Hanif
+]([https://](https://www.linkedin.com/in/malikwaqas162/))
