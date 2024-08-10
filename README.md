@@ -1,4 +1,4 @@
-# Maybank Infrastructure Deployment using Terraform
+# Assesment Infrastructure as Code Deployment using Terraform (IAC)
 
 This repository contains Terraform configurations for deploying a multi-tier architecture on AWS. The setup includes VPC, subnets, internet gateway, NAT gateway, security groups, EC2 instances, RDS, S3, CloudFront, and a Network Load Balancer (NLB).
 
@@ -16,6 +16,7 @@ This repository contains Terraform configurations for deploying a multi-tier arc
 ## Architecture
 
 The architecture includes:
+![alt text](Sandbox_dev/image.png)
 
 1. **VPC:** A Virtual Private Cloud with public and private subnets across two availability zones.
 2. **Subnets:** 
@@ -59,7 +60,7 @@ The architecture includes:
 
 ## Usage
 
-1. Update the `terraform.tfvars` file with your configuration values.
+1. Update the `my_variable.tfvars` file with your configuration values.
 
     ```hcl
     region               = "us-west-2"
@@ -83,7 +84,7 @@ The architecture includes:
 2. Apply the Terraform configurations:
 
     ```bash
-    terraform apply -var-file="terraform.tfvars"
+    terraform apply -var-file="my_variables.tfvars"
     ```
 
     Confirm the apply action with `yes`.
@@ -130,4 +131,5 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Author by [Muhammad Waqas Hanif
+]([https://](https://www.linkedin.com/in/malikwaqas162/))
