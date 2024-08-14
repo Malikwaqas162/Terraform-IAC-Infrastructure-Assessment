@@ -17,6 +17,8 @@ This repository contains Terraform configurations for deploying a multi-tier arc
 
 The architecture includes:
 ![alt text](Sandbox_dev/image.png)
+![Thumbnail](Sandbox_dev/image.png)
+
 
 1. **VPC:** A Virtual Private Cloud with public and private subnets across two availability zones.
 2. **Subnets:** 
@@ -127,7 +129,8 @@ Here are the outputs provided by the configuration:
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
+Contributions are welcome! Please open an issue or submit a pull request for any changes. 
+
 
 ## License
 
