@@ -11,5 +11,5 @@ resource "aws_db_instance" "replica" {
   vpc_security_group_ids = [aws_security_group.sg.id]
   replicate_source_db  = data.aws_db_instance.master.id
   availability_zone    = "us-west-2b"  # Ensure this is a different AZ from the master
-  tags = merge(var.common_tags, { Name = "maybank-rds-replica" })
+  tags = merge(var.common_tags, { Name = "YOURORG-rds-replica" })
 }

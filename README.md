@@ -48,8 +48,8 @@ The architecture includes:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/maybank-infra-terraform.git
-    cd maybank-infra-terraform
+    git clone https://github.com/yourusername/YOURORG-infra-terraform.git
+    cd YOURORG-infra-terraform
     ```
 
 2. Install the necessary Terraform providers and modules:
@@ -76,7 +76,7 @@ The architecture includes:
     bucket_name          = "your-s3bucketname"
 
     common_tags = {
-      Project     = "Maybank-Assessment-2024"
+      Project     = "YOURORG-Assessment-2024"
       Environment = "Sandbox_dev"
     }
     ```
