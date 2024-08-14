@@ -16,7 +16,7 @@ This repository contains Terraform configurations for deploying a multi-tier arc
 ## Architecture
 
 The architecture includes:
-![alt text](Sandbox_dev/image.png)
+
 ![Thumbnail](Sandbox_dev/image.png)
 
 
