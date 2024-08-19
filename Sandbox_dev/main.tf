@@ -27,12 +27,12 @@ resource "random_id" "bucket_id" {
 
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
-  tags       = merge(var.common_tags, { Name = "YOURORG-vpc" })
+  tags       = merge(var.common_tags, { Name = "yourorg-vpc" })
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
-  tags   = merge(var.common_tags, { Name = "YOURORG-igw" })
+  tags   = merge(var.common_tags, { Name = "yourorg-igw" })
 }
 
 resource "aws_route_table" "public" {
@@ -42,12 +42,12 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-  tags = merge(var.common_tags, { Name = "YOURORG-public-rt" })
+  tags = merge(var.common_tags, { Name = "yourorg-public-rt" })
 }
 
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
-  tags   = merge(var.common_tags, { Name = "YOURORG-private-rt" })
+  tags   = merge(var.common_tags, { Name = "yourorg-private-rt" })
 }
 
 resource "aws_subnet" "public_a" {
@@ -55,7 +55,7 @@ resource "aws_subnet" "public_a" {
   cidr_block        = var.public_subnet_cidr_a
   availability_zone = "us-west-2a"
   tags = merge(var.common_tags, { 
-    Name = "YOURORG-public-subnet-a",
+    Name = "yourorg-public-subnet-a",
     Availability_Zone = "AZ-1"
   })
 }
@@ -65,7 +65,7 @@ resource "aws_subnet" "public_b" {
   cidr_block        = var.public_subnet_cidr_b
   availability_zone = "us-west-2b"
   tags = merge(var.common_tags, { 
-    Name = "YOURORG-public-subnet-b",
+    Name = "yourorg-public-subnet-b",
     Availability_Zone = "AZ-2"
   })
 }
@@ -75,7 +75,7 @@ resource "aws_subnet" "private_a" {
   cidr_block        = var.private_subnet_cidr_a
   availability_zone = "us-west-2a"
   tags = merge(var.common_tags, { 
-    Name = "YOURORG-private-subnet-a",
+    Name = "yourorg-private-subnet-a",
     Availability_Zone = "AZ-1"
   })
 }
@@ -85,20 +85,20 @@ resource "aws_subnet" "private_b" {
   cidr_block        = var.private_subnet_cidr_b
   availability_zone = "us-west-2b"
   tags = merge(var.common_tags, { 
-    Name = "YOURORG-private-subnet-b",
+    Name = "yourorg-private-subnet-b",
     Availability_Zone = "AZ-2"
   })
 }
 
 resource "aws_eip" "nat" {
   domain = "vpc"
-  tags   = merge(var.common_tags, { Name = "YOURORG-nat-eip" })
+  tags   = merge(var.common_tags, { Name = "yourorg-nat-eip" })
 }
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public_a.id
-  tags          = merge(var.common_tags, { Name = "YOURORG-nat-gw" })
+  tags          = merge(var.common_tags, { Name = "yourorg-nat-gw" })
 }
 
 resource "aws_route_table_association" "public_a" {
@@ -158,11 +158,11 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.common_tags, { Name = "YOURORG-sg" })
+  tags = merge(var.common_tags, { Name = "yourorg-sg" })
 }
 
 resource "aws_launch_template" "app" {
-  name_prefix   = "YOURORG-app-template-"
+  name_prefix   = "yourorg-app-template-"
   image_id      = data.aws_ami.latest_amazon_linux.id
   instance_type = var.instance_type
 
@@ -170,7 +170,7 @@ resource "aws_launch_template" "app" {
 
   tag_specifications {
     resource_type = "instance"
-    tags = merge(var.common_tags, { Name = "YOURORG-app-instance" })
+    tags = merge(var.common_tags, { Name = "yourorg-app-instance" })
   }
 
   tag_specifications {
@@ -195,7 +195,7 @@ resource "aws_autoscaling_group" "app" {
 
   tag {
     key                 = "Name"
-    value               = "YOURORG-app-instance"
+    value               = "yourorg-app-instance"
     propagate_at_launch = true
   }
 
@@ -213,7 +213,7 @@ resource "aws_autoscaling_group" "app" {
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  name                   = "YOURORG-scale-up"
+  name                   = "yourorg-scale-up"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
@@ -221,7 +221,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_autoscaling_policy" "scale_down" {
-  name                   = "YOURORG-scale-down"
+  name                   = "yourorg-scale-down"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
@@ -234,7 +234,7 @@ resource "aws_instance" "ssm_host" {
   subnet_id              = aws_subnet.public_b.id
   vpc_security_group_ids = [aws_security_group.sg.id]
   iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name
-  tags                   = merge(var.common_tags, { Name = "YOURORG-ssm-host" })
+  tags                   = merge(var.common_tags, { Name = "yourorg-ssm-host" })
 }
 
 resource "aws_db_instance" "master" {
@@ -249,19 +249,19 @@ resource "aws_db_instance" "master" {
   vpc_security_group_ids = [aws_security_group.sg.id]
   db_subnet_group_name   = aws_db_subnet_group.main.name
   backup_retention_period = 7  # Enable automated backups for 7 days
-  tags = merge(var.common_tags, { Name = "YOURORG-rds-master" })
+  tags = merge(var.common_tags, { Name = "yourorg-rds-master" })
 }
 
 resource "aws_db_subnet_group" "main" {
-  name       = "YOURORG-db-subnet-group"
+  name       = "yourorg-db-subnet-group"
   subnet_ids = [aws_subnet.private_a.id, aws_subnet.private_b.id]
-  tags       = merge(var.common_tags, { Name = "YOURORG-db-subnet-group" })
+  tags       = merge(var.common_tags, { Name = "yourorg-db-subnet-group" })
 }
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}-${random_id.bucket_id.hex}"
 
-  tags = merge(var.common_tags, { Name = "YOURORG-s3-bucket" })
+  tags = merge(var.common_tags, { Name = "yourorg-s3-bucket" })
 }
 
 resource "aws_s3_bucket_public_access_block" "block_public_access" {
@@ -285,7 +285,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "YOURORG CloudFront Distribution"
+  comment             = "yourorg CloudFront Distribution"
   default_root_object = "index.html"
 
   default_cache_behavior {
@@ -317,7 +317,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     }
   }
 
-  tags = merge(var.common_tags, { Name = "YOURORG-cloudfront" })
+  tags = merge(var.common_tags, { Name = "yourorg-cloudfront" })
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
@@ -325,16 +325,16 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_lb" "nlb" {
-  name               = "YOURORG-public-nlb"
+  name               = "yourorg-public-nlb"
   internal           = false
   load_balancer_type = "network"
   subnets            = [aws_subnet.public_a.id]
 
-  tags = merge(var.common_tags, { Name = "YOURORG-public-nlb" })
+  tags = merge(var.common_tags, { Name = "yourorg-public-nlb" })
 }
 
 resource "aws_lb_target_group" "target_group" {
-  name     = "YOURORG-app-target-group"
+  name     = "yourorg-app-target-group"
   port     = 80
   protocol = "TCP"
   vpc_id   = aws_vpc.main.id
@@ -344,7 +344,7 @@ resource "aws_lb_target_group" "target_group" {
     port     = "traffic-port"
   }
 
-  tags = merge(var.common_tags, { Name = "YOURORG-target-group" })
+  tags = merge(var.common_tags, { Name = "yourorg-target-group" })
 }
 
 resource "aws_lb_listener" "listener" {
@@ -359,7 +359,7 @@ resource "aws_lb_listener" "listener" {
 }
 
 resource "aws_iam_role" "ssm_role" {
-  name = "YOURORG-ssm-role"
+  name = "yourorg-ssm-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -375,7 +375,7 @@ resource "aws_iam_role" "ssm_role" {
     ]
   })
 
-  tags = merge(var.common_tags, { Name = "YOURORG-ssm-role" })
+  tags = merge(var.common_tags, { Name = "yourorg-ssm-role" })
 }
 
 resource "aws_iam_role_policy_attachment" "ssm_attach" {
@@ -384,6 +384,6 @@ resource "aws_iam_role_policy_attachment" "ssm_attach" {
 }
 
 resource "aws_iam_instance_profile" "ssm_instance_profile" {
-  name = "YOURORG-ssm-instance-profile"
+  name = "yourorg-ssm-instance-profile"
   role = aws_iam_role.ssm_role.name
 }

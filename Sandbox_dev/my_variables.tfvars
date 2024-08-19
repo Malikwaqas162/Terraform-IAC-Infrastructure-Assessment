@@ -11,6 +11,6 @@ db_password          = "yourpassword"
 bucket_name          = "your-s3bucketname"
 
 common_tags = {
-  Project     = "YOURORG-assessment-2024"
+  Project     = "yourorg-assessment-2024"
   Environment = "Sandbox_dev"
 }
